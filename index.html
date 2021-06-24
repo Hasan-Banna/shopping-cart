@@ -26,7 +26,7 @@
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
                            <button id="addDecrement" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input id="quantity" type="text" class="form-control text-center" value="1">
+                           <input id="phoneQty" type="text" class="form-control text-center" value="1">
                            <button id="addIncrement" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
                         <h5>$ <span id="phoneAmount">1219</span></h5>
@@ -43,12 +43,12 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="caseDecBtn" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="caseQty" type="text" class="form-control text-center" value="1">
+                           <button id="caseIncBtn" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$59</h5>
+                        <h5 id="caseAmount">$59</h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -64,7 +64,7 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
+                        <h5 id="subTotal">$1,278</h5>
                         <h5>$0</h5>
                         <h5>$1,278</h5>
                      </div>
@@ -82,34 +82,63 @@
       //Add increment button even handler
       const incrementBtn = document.getElementById("addIncrement");
       incrementBtn.addEventListener("click", function () {
-         const increment = document.getElementById("quantity").value;
+         const increment = document.getElementById("phoneQty").value;
          const newIncrement = parseFloat(increment) + 1;
-         document.getElementById("quantity").value = newIncrement;
+         document.getElementById("phoneQty").value = newIncrement;
          updatePhonePrice();
          
       })
-
+      //Add increment button even handler for phone case
+      const caseIncBtn = document.getElementById("caseIncBtn");
+      caseIncBtn.addEventListener("click", function(){
+         var caseIncrement = document.getElementById("caseQty").value;
+         const newCaseIncrement = parseFloat(caseIncrement)  + 1;
+         document.getElementById("caseQty").value = newCaseIncrement;
+         updateCasePrice();
+      })
+      // add decrement button even handler for phone case
+      const caseDecBtn = document.getElementById("caseDecBtn");
+      caseDecBtn.addEventListener("click", function () {
+         const caseDecrement = document.getElementById("caseQty").value;
+         const newCaseDecrement = parseFloat(caseDecrement) - 1;
+         
+         if (newCaseDecrement >= 0) {
+            document.getElementById("caseQty").value = newCaseDecrement;
+            updateCasePrice();
+         } else {
+            return 0;
+         }
+      })
       //Add decrement button even handler
       const decrementBtn = document.getElementById("addDecrement");
       decrementBtn.addEventListener("click", function () {
-         const decrement = document.getElementById("quantity").value;
+         const decrement = document.getElementById("phoneQty").value;
          const newDecrement = parseFloat(decrement) - 1;
          
          if (newDecrement >= 0) {
-            document.getElementById("quantity").value = newDecrement;
+            document.getElementById("phoneQty").value = newDecrement;
             updatePhonePrice();
          } else {
             return 0;
          }
       })
+      //update total price
+      
+      
       //phone Amount update
       function updatePhonePrice(){
-         var phoneCount = document.getElementById("quantity").value;
+         var phoneCount = document.getElementById("phoneQty").value;
          var phonePrice = parseFloat(phoneCount) * 1219;
          var currentAmount = document.getElementById("phoneAmount").innerText;
-         document.getElementById("phoneAmount").innerText = + phonePrice;
+         document.getElementById("phoneAmount").innerText =  phonePrice;
       }
-
+      //Case Amount update
+      function updateCasePrice(){
+         var caseCount = document.getElementById("caseQty").value;
+         var casePrice = parseFloat(caseCount) * 59;
+         var currentAmount = document.getElementById("caseAmount").innerText;
+         document.getElementById("caseAmount").innerText = "$" + casePrice;
+      }
 
    </script>
 </body>
