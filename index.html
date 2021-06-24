@@ -88,6 +88,7 @@
          updatePhonePrice();
          updateTotal();
       })
+      
       //Add increment button even handler for phone case
       const caseIncBtn = document.getElementById("caseIncBtn");
       caseIncBtn.addEventListener("click", function(){
@@ -97,20 +98,7 @@
          updateCasePrice();
          updateTotal();
       })
-      // add decrement button even handler for phone case
-      const caseDecBtn = document.getElementById("caseDecBtn");
-      caseDecBtn.addEventListener("click", function () {
-         const caseDecrement = document.getElementById("caseQty").value;
-         const newCaseDecrement = parseFloat(caseDecrement) - 1;
-         
-         if (newCaseDecrement >= 0) {
-            document.getElementById("caseQty").value = newCaseDecrement;
-            updateCasePrice();
-            updateTotal();
-         } else {
-            return 0;
-         }
-      })
+
       //Add decrement button even handler
       const decrementBtn = document.getElementById("addDecrement");
       decrementBtn.addEventListener("click", function () {
@@ -125,13 +113,29 @@
             return 0;
          }
       })
+
+      // add decrement button even handler for phone case
+      const caseDecBtn = document.getElementById("caseDecBtn");
+      caseDecBtn.addEventListener("click", function () {
+         const caseDecrement = document.getElementById("caseQty").value;
+         const newCaseDecrement = parseFloat(caseDecrement) - 1;
+         
+         if (newCaseDecrement >= 0) {
+            document.getElementById("caseQty").value = newCaseDecrement;
+            updateCasePrice();
+            updateTotal();
+         } else {
+            return 0;
+         }
+      })
+
       //update total price
       function updateTotal(){
       const phoneCount = document.getElementById('phoneQty').value;
       const caseCount = document.getElementById('caseQty').value;
       const totalPrice = parseInt(phoneCount) * 1219 + parseInt(caseCount) * 59;
-      const totalPriceElement = document.getElementById('subTotal');
-      totalPriceElement.innerText = '$' +  totalPrice;
+      const subTotalPrice = document.getElementById('subTotal');
+      subTotalPrice.innerText = '$' +  totalPrice;
       const grandTotalElement = document.getElementById('totalPrice');
       grandTotalElement.innerText = '$' +  totalPrice;
       }
@@ -143,6 +147,7 @@
          var currentAmount = document.getElementById("phoneAmount").innerText;
          document.getElementById("phoneAmount").innerText =  phonePrice;
       }
+
       //Case Amount update
       function updateCasePrice(){
          var caseCount = document.getElementById("caseQty").value;
