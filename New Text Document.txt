@@ -1,0 +1,1 @@
+আমি যখন ভ্যারিয়েবল নাম (currentAmount.innerText) দিয়ে করতে যাই তখন মোবাইল এর প্রাইস আপডেট হয় না। এইটার কারণ কি ? এখানেতো (document.getElementById("phoneAmount").innerText;) এর ভ্যালু (currentAmount) ভ্যারিয়েবল এর মধ্যে স্টোর করা আছে। কেউ এইটার সমাধানা জানলে বলেন।  
